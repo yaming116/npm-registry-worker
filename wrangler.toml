@@ -1,0 +1,4 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "npmproxy"
+main = "index.js"
+compatibility_date = "2023-05-18"
