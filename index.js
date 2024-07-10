@@ -39,15 +39,10 @@ export default {
 			return new Response(`Hello ${CUSTOM_DOMAIN}`);
 		}
 
-		if (url.pathname.endsWith('.tgz')) {
-			let response = await fetch(`${NPM_JS}${url.pathname}`);
-			const contentType = response.headers.get('content-type');
-			if (contentType && contentType.indexOf('application/json') !== -1) {
-				return json({ error: `NPM fetch failed: ${(await response.json()).message}` }, 500);
-			} else {
-				return response;
-			}
-		}
+		if (url.pathname.endsWith(".tgz") || url.pathname.split('/').length === 2) {
+      			let response = await fetch(`${NPM_JS}${url.pathname}`);
+      			return response;
+    		}
 
 		let data = await (await fetch(`${NPM_JS}${url.pathname}`)).json();
 		if (data.error) {
